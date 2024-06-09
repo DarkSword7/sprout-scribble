@@ -19,7 +19,8 @@ export default async function Nav() {
             <li>
               <Button asChild>
                 <Link className="flex gap-2" href={"/auth/login"}>
-                  <LogIn size={16} /> <span>Login</span>
+                  <LogIn aria-label="sign-in" size={16} />
+                  <span>Login</span>
                 </Link>
               </Button>
             </li>
