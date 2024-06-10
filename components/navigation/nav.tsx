@@ -13,7 +13,9 @@ export default async function Nav() {
       <nav>
         <ul className="flex justify-between">
           <li>
-            <Logo />
+            <Link href={"/"}>
+              <Logo />
+            </Link>
           </li>
           {!session ? (
             <li>
