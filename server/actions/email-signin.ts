@@ -2,7 +2,7 @@
 
 import { LoginSchema } from "@/types/login-schema";
 import { createSafeActionClient } from "next-safe-action";
-import { db } from "..";
+import { db } from "@/server";
 import { eq } from "drizzle-orm";
 import { users } from "../schema";
 

@@ -22,6 +22,34 @@
       "when": 1718020689382,
       "tag": "0002_colorful_gravity",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1718029887679,
+      "tag": "0003_curious_wild_child",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1718029995637,
+      "tag": "0004_clean_wraith",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1718030811753,
+      "tag": "0005_concerned_crusher_hogan",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1718031997340,
+      "tag": "0006_freezing_the_renegades",
+      "breakpoints": true
     }
   ]
 }
