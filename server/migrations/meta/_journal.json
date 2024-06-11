@@ -50,6 +50,13 @@
       "when": 1718031997340,
       "tag": "0006_freezing_the_renegades",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1718109979064,
+      "tag": "0007_lucky_patriot",
+      "breakpoints": true
     }
   ]
 }
