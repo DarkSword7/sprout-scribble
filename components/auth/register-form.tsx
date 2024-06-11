@@ -21,6 +21,8 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { RegisterSchema } from "@/types/register-schema";
 import { emailRegister } from "@/server/actions/email-register";
+import { FormSuccess } from "./form-success";
+import { FormError } from "./form-error";
 
 export const RegisterForm = () => {
   const form = useForm({
@@ -33,12 +35,12 @@ export const RegisterForm = () => {
   });
 
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const { status, execute } = useAction(emailRegister, {
     onSuccess(data) {
-      if (data.success) {
-        console.log(data.success);
-      }
+      if (data.error) setError(data.error);
+      if (data.success) setSuccess(data.success);
     },
   });
 
@@ -112,6 +114,8 @@ export const RegisterForm = () => {
                   </FormItem>
                 )}
               />
+              <FormSuccess message={success} />
+              <FormError message={error} />
               <Button size={"sm"} variant={"link"} asChild>
                 <Link href="/auth/reset">Forgot your password</Link>
               </Button>
