@@ -24,7 +24,7 @@ export const emailSignin = action(
       if (existingUser?.email !== email) {
         return { error: "Email not found" };
       }
-
+      //Check if user is not verified
       if (!existingUser.emailVerified) {
         const verificationToken = await generateEmailVerificationToken(
           existingUser.email
@@ -42,6 +42,7 @@ export const emailSignin = action(
         password,
         redirectTo: "/",
       });
+
       return { success: "User Signed In!" };
     } catch (error) {
       if (error instanceof AuthError) {

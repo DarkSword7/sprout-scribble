@@ -25,7 +25,7 @@ import { FormSuccess } from "./form-success";
 import { FormError } from "./form-error";
 
 export const LoginForm = () => {
-  const form = useForm({
+  const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: "",
@@ -39,7 +39,9 @@ export const LoginForm = () => {
   const { execute, status } = useAction(emailSignin, {
     onSuccess(data) {
       if (data?.error) setError(data.error);
-      if (data?.success) setSuccess(data.success);
+      if (data?.success) {
+        setSuccess(data.success);
+      }
     },
   });
 
