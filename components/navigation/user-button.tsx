@@ -71,14 +71,14 @@ export const UserButton = ({ user }: Session) => {
             </span>
           </div>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="group py-2 font-medium cursor-pointer transition-all  ease-in-out">
+          <DropdownMenuItem className="group py-2 font-medium cursor-pointer ease-in-out">
             <Truck
               size={14}
               className="mr-3 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
             />
             My Orders
           </DropdownMenuItem>
-          <DropdownMenuItem className="group py-2 font-medium cursor-pointer transition-all ease-in-out">
+          <DropdownMenuItem className="group py-2 font-medium cursor-pointer ease-in-out">
             <Settings
               size={14}
               className="mr-3 group-hover:rotate-180 transition-all duration-300 ease-in-out"
@@ -86,7 +86,7 @@ export const UserButton = ({ user }: Session) => {
             Settings
           </DropdownMenuItem>
           {theme && (
-            <DropdownMenuItem className="py-2 font-medium cursor-pointer transition-all ease-in-out">
+            <DropdownMenuItem className="py-2 font-medium cursor-pointer ease-in-out">
               <div
                 onClick={(e) => e.stopPropagation()}
                 className="flex items-center group"
@@ -121,7 +121,7 @@ export const UserButton = ({ user }: Session) => {
             </DropdownMenuItem>
           )}
           <DropdownMenuItem
-            className="group py-2 font-medium focus:bg-destructive/30 cursor-pointer transition-all ease-in-out"
+            className="group py-2 font-medium focus:bg-destructive/30 cursor-pointer ease-in-out"
             onClick={() => signOut()}
           >
             <LogOut
