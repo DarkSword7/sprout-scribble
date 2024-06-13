@@ -57,6 +57,13 @@
       "when": 1718109979064,
       "tag": "0007_lucky_patriot",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1718280134534,
+      "tag": "0008_careless_killer_shrike",
+      "breakpoints": true
     }
   ]
 }

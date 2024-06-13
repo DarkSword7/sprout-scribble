@@ -18,6 +18,17 @@ export const sendVerificationEmail = async (email: string, token: string) => {
   if (data) return data;
 };
 
+export const sendTwoFactorEmail = async (email: string, token: string) => {
+  const { data, error } = await resend.emails.send({
+    from: "onboarding@resend.dev",
+    to: email,
+    subject: "Sprout and Scribble - Your 2 Factor Code",
+    html: `<p>Your Confirmation Code: ${token}</p>`,
+  });
+  if (error) console.log(error);
+  if (data) return data;
+};
+
 export const sendPasswordResetEmail = async (email: string, token: string) => {
   const confirmLink = `${domain}/auth/new-password?token=${token}`;
   console.log(email, "Emaiil");
