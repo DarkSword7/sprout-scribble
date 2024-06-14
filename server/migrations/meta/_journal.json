@@ -64,6 +64,13 @@
       "when": 1718280134534,
       "tag": "0008_careless_killer_shrike",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1718377658978,
+      "tag": "0009_heavy_starbolt",
+      "breakpoints": true
     }
   ]
 }
