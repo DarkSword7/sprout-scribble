@@ -1,5 +1,5 @@
 "use client";
-import { zProductSchema } from "@/types/product-schema";
+import { ProductSchema, zProductSchema } from "@/types/product-schema";
 import { useForm } from "react-hook-form";
 import {
   Card,
@@ -20,9 +20,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { IndianRupee } from "lucide-react";
+import Tiptap from "./tiptap";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function ProductForm() {
   const form = useForm<zProductSchema>({
+    resolver: zodResolver(ProductSchema),
     defaultValues: {
       title: "",
       description: "",
@@ -62,10 +65,7 @@ export default function ProductForm() {
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    {/* <Input
-                      placeholder="Details About Spidy Bag..."
-                      {...field}
-                    /> */}
+                    <Tiptap val={field.value} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
