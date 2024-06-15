@@ -22,6 +22,8 @@ import { Input } from "@/components/ui/input";
 import { IndianRupee } from "lucide-react";
 import Tiptap from "./tiptap";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAction } from "next-safe-action/hooks";
+import { createProduct } from "@/server/actions/create-product";
 
 export default function ProductForm() {
   const form = useForm<zProductSchema>({
@@ -33,8 +35,17 @@ export default function ProductForm() {
     },
   });
 
-  const onSubmit = (data: zProductSchema) => {
-    console.log(data);
+  const { execute, status } = useAction(createProduct, {
+    onSuccess: (data) => {
+      if (data?.success) {
+        console.log(data.success);
+      }
+    },
+    onError: (error) => console.log(error),
+  });
+
+  const onSubmit = (values: zProductSchema) => {
+    execute(values);
   };
   return (
     <Card>
@@ -96,15 +107,20 @@ export default function ProductForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
+            <Button
+              disabled={
+                status === "executing" ||
+                !form.formState.isValid ||
+                !form.formState.isDirty
+              }
+              type="submit"
+              className="w-full"
+            >
               Submit
             </Button>
           </form>
         </Form>
       </CardContent>
-      <CardFooter>
-        <p>Card Footer</p>
-      </CardFooter>
     </Card>
   );
 }
