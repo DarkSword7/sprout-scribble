@@ -35,7 +35,7 @@ const ActionCell = ({ row }: { row: Row<ProductColumn> }) => {
       }
     },
     onExecute: (data) => {
-      toast.loading("Deleting Product...");
+      toast.loading("Deleting Product");
     },
   });
   const product = row.original;

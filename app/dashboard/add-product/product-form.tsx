@@ -26,6 +26,8 @@ import { useAction } from "next-safe-action/hooks";
 import { createProduct } from "@/server/actions/create-product";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
+import { getProduct } from "@/server/actions/get-product";
+import { useEffect } from "react";
 
 export default function ProductForm() {
   const form = useForm<zProductSchema>({
@@ -42,6 +44,31 @@ export default function ProductForm() {
   const searchParams = useSearchParams();
   const editMode = searchParams.get("id");
 
+  const checkProduct = async (id: number) => {
+    if (editMode) {
+      const data = await getProduct(id);
+      if (data.error) {
+        toast.error(data.error);
+        router.push("/dashboard/products");
+        return;
+      }
+      if (data.success) {
+        const id = parseInt(editMode);
+        form.setValue("title", data.success.title);
+        form.setValue("description", data.success.description);
+        form.setValue("price", data.success.price);
+        form.setValue("id", id);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (editMode) {
+      checkProduct(parseInt(editMode));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const { execute, status } = useAction(createProduct, {
     onSuccess: (data) => {
       if (data?.error) {
@@ -53,7 +80,12 @@ export default function ProductForm() {
       }
     },
     onExecute: (data) => {
-      toast.loading("Creating Product...");
+      if (editMode) {
+        toast.loading("Updating Product");
+      }
+      if (!editMode) {
+        toast.loading("Creating Product");
+      }
     },
   });
 
@@ -63,8 +95,12 @@ export default function ProductForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>Card Description</CardDescription>
+        <CardTitle>{editMode ? "Edit Product" : "Create Product"}</CardTitle>
+        <CardDescription>
+          {editMode
+            ? "Make changes to existing product"
+            : "Add a brand new product"}
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -129,7 +165,7 @@ export default function ProductForm() {
               type="submit"
               className="w-full"
             >
-              Submit
+              {editMode ? "Save Changes" : "Create Product"}
             </Button>
           </form>
         </Form>

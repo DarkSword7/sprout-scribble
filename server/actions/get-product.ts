@@ -10,7 +10,7 @@ export async function getProduct(id: number) {
       where: eq(products.id, id),
     });
     if (!product) throw new Error("Product not found");
-    return { success: `Product ${product.title} has been found`, product };
+    return { success: product };
   } catch (error) {
     return { error: "Failed to get product" };
   }
