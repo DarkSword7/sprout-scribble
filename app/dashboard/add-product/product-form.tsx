@@ -24,7 +24,7 @@ import Tiptap from "./tiptap";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAction } from "next-safe-action/hooks";
 import { createProduct } from "@/server/actions/create-product";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 
 export default function ProductForm() {
@@ -39,6 +39,8 @@ export default function ProductForm() {
   });
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const editMode = searchParams.get("id");
 
   const { execute, status } = useAction(createProduct, {
     onSuccess: (data) => {
