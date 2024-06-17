@@ -11,7 +11,8 @@ import {
 } from "drizzle-orm/pg-core";
 import { AdapterAccountType } from "next-auth/adapters";
 import { createId } from "@paralleldrive/cuid2";
-import { relations } from "drizzle-orm";
+import { InferSelectModel, relations } from "drizzle-orm";
+import { Infer } from "next/dist/compiled/superstruct";
 
 export const RoleEnum = pgEnum("roles", ["user", "admin"]);
 
