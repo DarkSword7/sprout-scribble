@@ -25,8 +25,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { InputTags } from "./input-tags";
+import { VariantImages } from "./variant-images";
 
-export default function ProductVariant({
+export const ProductVariant = ({
   editMode,
   productID,
   variant,
@@ -36,7 +37,7 @@ export default function ProductVariant({
   productID?: number;
   variant?: VariantsWithImagesTags;
   children: React.ReactNode;
-}) {
+}) => {
   const form = useForm<z.infer<typeof VariantSchema>>({
     resolver: zodResolver(VariantSchema),
     defaultValues: {
@@ -58,7 +59,7 @@ export default function ProductVariant({
   return (
     <Dialog>
       <DialogTrigger>{children}</DialogTrigger>
-      <DialogContent>
+      <DialogContent className="lg:max-w-screen-lg overflow-y-scroll max-h-[720px] rounded-md">
         <DialogHeader>
           <DialogTitle>{editMode ? "Edit" : "Create"} your variant</DialogTitle>
           <DialogDescription>
@@ -111,7 +112,7 @@ export default function ProductVariant({
                 </FormItem>
               )}
             />
-            {/* <VariantImages /> */}
+            <VariantImages />
             {editMode && variant && (
               <Button type="button" onClick={(e) => e.preventDefault()}>
                 Delete Variant
@@ -125,4 +126,4 @@ export default function ProductVariant({
       </DialogContent>
     </Dialog>
   );
-}
+};

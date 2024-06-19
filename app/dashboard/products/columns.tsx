@@ -23,7 +23,7 @@ import { deleteProduct } from "@/server/actions/delete-product";
 import { toast } from "sonner";
 import Link from "next/link";
 import { VariantsWithImagesTags } from "@/lib/infer-type";
-import ProductVariant from "./product-variant";
+import { ProductVariant } from "./product-variant";
 
 type ProductColumn = {
   title: string;
