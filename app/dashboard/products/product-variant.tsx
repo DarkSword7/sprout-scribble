@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { InputTags } from "./input-tags";
 
 export default function ProductVariant({
   editMode,
@@ -102,8 +103,10 @@ export default function ProductVariant({
               name="tags"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Variant Tags</FormLabel>
-                  <FormControl>{/* <InputTags {...field} /> */}</FormControl>
+                  <FormLabel>Tags</FormLabel>
+                  <FormControl>
+                    <InputTags {...field} onChange={(e) => field.onChange(e)} />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}

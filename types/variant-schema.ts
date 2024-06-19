@@ -12,7 +12,7 @@ export const VariantSchema = z.object({
     .min(3, { message: "Color must be at least 3 characters long" }),
   tags: z
     .array(z.string())
-    .min(1, { message: "Tags must have at least 1 tag" }),
+    .min(1, { message: "You must have at least one tag" }),
   variantImages: z.array(
     z.object({
       url: z.string().refine((url) => url.search("blob:") !== 0, {
