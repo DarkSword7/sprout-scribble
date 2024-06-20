@@ -10,19 +10,18 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-
 import Image from "next/image";
 import { useAction } from "next-safe-action/hooks";
 import { deleteProduct } from "@/server/actions/delete-product";
 import { toast } from "sonner";
 import Link from "next/link";
 import { VariantsWithImagesTags } from "@/lib/infer-type";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { ProductVariant } from "./product-variant";
 
 type ProductColumn = {
@@ -34,7 +33,7 @@ type ProductColumn = {
 };
 
 const ActionCell = ({ row }: { row: Row<ProductColumn> }) => {
-  const { execute, status } = useAction(deleteProduct, {
+  const { status, execute } = useAction(deleteProduct, {
     onSuccess: (data) => {
       if (data?.error) {
         toast.error(data.error);
@@ -43,7 +42,7 @@ const ActionCell = ({ row }: { row: Row<ProductColumn> }) => {
         toast.success(data.success);
       }
     },
-    onExecute: (data) => {
+    onExecute: () => {
       toast.loading("Deleting Product");
     },
   });
@@ -56,7 +55,7 @@ const ActionCell = ({ row }: { row: Row<ProductColumn> }) => {
           <MoreHorizontal className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="cursor-pointer">
+      <DropdownMenuContent>
         <DropdownMenuItem className="dark:focus:bg-primary focus:bg-primary/50 cursor-pointer">
           <Link href={`/dashboard/add-product?id=${product.id}`}>
             Edit Product
@@ -88,7 +87,7 @@ export const columns: ColumnDef<ProductColumn>[] = [
     cell: ({ row }) => {
       const variants = row.getValue("variants") as VariantsWithImagesTags[];
       return (
-        <div>
+        <div className="flex gap-2">
           {variants.map((variant) => (
             <div key={variant.id}>
               <TooltipProvider>
@@ -100,7 +99,7 @@ export const columns: ColumnDef<ProductColumn>[] = [
                       editMode={true}
                     >
                       <div
-                        className="h-5 w-5 rounded-full"
+                        className="w-5 h-5 rounded-full"
                         key={variant.id}
                         style={{ background: variant.color }}
                       />
@@ -116,9 +115,9 @@ export const columns: ColumnDef<ProductColumn>[] = [
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <span className="text-primary">
-                  <ProductVariant editMode={false}>
-                    <PlusCircle className="h-4 w-4" />
+                <span>
+                  <ProductVariant productID={row.original.id} editMode={false}>
+                    <PlusCircle className="h-5 w-5" />
                   </ProductVariant>
                 </span>
               </TooltipTrigger>
@@ -136,9 +135,9 @@ export const columns: ColumnDef<ProductColumn>[] = [
     header: "Price",
     cell: ({ row }) => {
       const price = parseFloat(row.getValue("price"));
-      const formatted = new Intl.NumberFormat("en-IN", {
+      const formatted = new Intl.NumberFormat("en-US", {
+        currency: "USD",
         style: "currency",
-        currency: "INR",
       }).format(price);
       return <div className="font-medium text-xs">{formatted}</div>;
     },
@@ -150,20 +149,20 @@ export const columns: ColumnDef<ProductColumn>[] = [
       const cellImage = row.getValue("image") as string;
       const cellTitle = row.getValue("title") as string;
       return (
-        <div>
+        <div className="">
           <Image
             src={cellImage}
             alt={cellTitle}
-            className="rounded-md"
             width={50}
             height={50}
+            className="rounded-md"
           />
         </div>
       );
     },
   },
   {
-    id: "action",
+    id: "actions",
     header: "Actions",
     cell: ActionCell,
   },

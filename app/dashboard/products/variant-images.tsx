@@ -171,3 +171,5 @@ export const VariantImages = () => {
     </div>
   );
 };
+
+export default VariantImages;
