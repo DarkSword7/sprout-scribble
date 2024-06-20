@@ -191,6 +191,7 @@ export const ProductVariant = forwardRef<HTMLDivElement, VariantProps>(
                   <Button
                     variant={"destructive"}
                     type="button"
+                    disabled={variantAction.status === "executing"}
                     onClick={(e) => {
                       e.preventDefault();
                       variantAction.execute({ id: variant.id });
