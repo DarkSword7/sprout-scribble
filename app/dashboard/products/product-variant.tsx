@@ -30,6 +30,7 @@ import { useAction } from "next-safe-action/hooks";
 import { createVariant } from "@/server/actions/create-variant";
 import { toast } from "sonner";
 import { forwardRef, useEffect, useState } from "react";
+import { deleteVariant } from "@/server/actions/delete-variant";
 
 type VariantProps = {
   children: React.ReactNode;
@@ -100,6 +101,21 @@ export const ProductVariant = forwardRef<HTMLDivElement, VariantProps>(
       },
     });
 
+    const variantAction = useAction(deleteVariant, {
+      onExecute() {
+        toast.loading("Deleting variant", { duration: 500 });
+        setOpen(false);
+      },
+      onSuccess(data) {
+        if (data?.error) {
+          toast.error(data.error);
+        }
+        if (data?.success) {
+          toast.success(data.success);
+        }
+      },
+    });
+
     function onSubmit(values: z.infer<typeof VariantSchema>) {
       // Do something with the form values.
       // ✅ This will be type-safe and validated.
@@ -110,7 +126,7 @@ export const ProductVariant = forwardRef<HTMLDivElement, VariantProps>(
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger>{children}</DialogTrigger>
-        <DialogContent className="lg:max-w-screen-lg overflow-y-scroll max-h-[860px]">
+        <DialogContent className="lg:max-w-screen-lg overflow-y-scroll max-h-[640px]">
           <DialogHeader>
             <DialogTitle>
               {editMode ? "Edit" : "Create"} your variant
@@ -172,7 +188,14 @@ export const ProductVariant = forwardRef<HTMLDivElement, VariantProps>(
               <VariantImages />
               <div className="flex gap-4 items-center justify-center">
                 {editMode && variant && (
-                  <Button variant={"destructive"} type="button">
+                  <Button
+                    variant={"destructive"}
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      variantAction.execute({ id: variant.id });
+                    }}
+                  >
                     Delete Variant
                   </Button>
                 )}
