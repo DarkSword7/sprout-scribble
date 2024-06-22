@@ -13,7 +13,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -39,6 +38,7 @@ export default function ReviewsForm() {
     defaultValues: {
       rating: 0,
       comment: "",
+      productID,
     },
   });
 
@@ -66,7 +66,6 @@ export default function ReviewsForm() {
     <Popover>
       <PopoverTrigger asChild>
         <div className="w-full">
-          \
           <Button className="w-full font-medium" variant={"secondary"}>
             Leave a review
           </Button>
@@ -87,6 +86,7 @@ export default function ReviewsForm() {
                       {...field}
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -111,13 +111,15 @@ export default function ReviewsForm() {
                           <Star
                             key={value}
                             onClick={() => {
-                              form.setValue("rating", value);
+                              form.setValue("rating", value, {
+                                shouldValidate: true,
+                              });
                             }}
                             className={cn(
                               "text-primary bg-transparent transition-all duration-300 ease-in-out",
                               form.getValues("rating") >= value
-                                ? "text-primary"
-                                : "text-muted"
+                                ? "fill-primary"
+                                : "fill-muted"
                             )}
                           />
                         </motion.div>
