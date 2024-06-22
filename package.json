@@ -38,6 +38,7 @@
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.31.2",
+    "embla-carousel-react": "^8.1.5",
     "framer-motion": "^11.2.10",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.390.0",
