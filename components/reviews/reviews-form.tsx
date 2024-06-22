@@ -26,6 +26,9 @@ import { Textarea } from "../ui/textarea";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAction } from "next-safe-action/hooks";
+import { addReview } from "@/server/actions/add-review";
+import { toast } from "sonner";
 
 export default function ReviewsForm() {
   const params = useSearchParams();
@@ -39,8 +42,24 @@ export default function ReviewsForm() {
     },
   });
 
+  const { execute, status } = useAction(addReview, {
+    onSuccess({ error, success }) {
+      if (error) {
+        toast.error(error);
+      }
+      if (success) {
+        toast.success("Review added 👌");
+        form.reset();
+      }
+    },
+  });
+
   function onSubmit(values: z.infer<typeof ReviewSchema>) {
-    console.log(values);
+    execute({
+      comment: values.comment,
+      rating: values.rating,
+      productID,
+    });
   }
 
   return (
@@ -108,8 +127,12 @@ export default function ReviewsForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
-              Add Review
+            <Button
+              disabled={status === "executing"}
+              type="submit"
+              className="w-full"
+            >
+              {status === "executing" ? "Adding Review..." : "Add Review"}
             </Button>
           </form>
         </Form>

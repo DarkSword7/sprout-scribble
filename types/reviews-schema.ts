@@ -1,6 +1,7 @@
 import * as z from "zod";
 
 export const ReviewSchema = z.object({
+  productID: z.number(),
   rating: z
     .number()
     .min(1, { message: "Rating must be at least one star" })
