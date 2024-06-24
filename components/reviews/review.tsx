@@ -29,7 +29,7 @@ export default function Review({ reviews }: { reviews: ReviewsWithUser[] }) {
               </div>
             </div>
           </div>
-          <p className="text-lg font-medium">{review.comment}</p>
+          <p className="py-2 font-medium">{review.comment}</p>
         </Card>
       ))}
     </motion.div>
