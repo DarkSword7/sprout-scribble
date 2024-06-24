@@ -1,4 +1,5 @@
 "use client";
+
 import { cn } from "@/lib/utils";
 import { Star } from "lucide-react";
 
@@ -23,9 +24,11 @@ export default function Stars({
           )}
         ></Star>
       ))}
-      <span className="text-secondary-foreground font-bold text-sm ml-2">
-        {totalReviews} reviews
-      </span>
+      {totalReviews ? (
+        <span className="text-secondary-foreground font-bold text-sm ml-2">
+          {totalReviews} reviews
+        </span>
+      ) : null}
     </div>
   );
 }

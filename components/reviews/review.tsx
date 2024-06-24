@@ -1,5 +1,4 @@
 "use client";
-
 import { ReviewsWithUser } from "@/lib/infer-type";
 import { motion } from "framer-motion";
 import { Card } from "../ui/card";
@@ -9,22 +8,22 @@ import Stars from "./stars";
 
 export default function Review({ reviews }: { reviews: ReviewsWithUser[] }) {
   return (
-    <motion.div className="flex flex-col gap-4">
+    <motion.div className="flex flex-col gap-4 my-2">
       {reviews.map((review) => (
         <Card key={review.id} className="p-4">
           <div className="flex gap-2 items-center">
             <Image
-              src={review.user.image!}
-              alt={review.user.name!}
+              className="rounded-full"
               width={32}
               height={32}
-              className="rounded-full"
+              alt={review.user.name!}
+              src={review.user?.image!}
             />
             <div>
               <p className="text-sm font-bold">{review.user.name}</p>
               <div className="flex items-center gap-2">
-                <Stars rating={review.rating} totalReviews={reviews.length} />
-                <p className="text-xs font-bold text-muted-foreground">
+                <Stars rating={review.rating} />
+                <p className="text-xs text-bold text-muted-foreground">
                   {formatDistance(subDays(review.created!, 0), new Date())}
                 </p>
               </div>
