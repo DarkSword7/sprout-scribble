@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:generate": "drizzle-kit generate --config=drizzle.config.ts",
-    "db:push": "drizzle-kit push --config=drizzle.config.ts"
+    "db:generate": "drizzle-kit generate drizzle.config.ts",
+    "db:push": "drizzle-kit push drizzle.config.ts"
   },
   "dependencies": {
     "@algolia/autocomplete-js": "^1.17.2",
