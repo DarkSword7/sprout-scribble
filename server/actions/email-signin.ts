@@ -1,8 +1,7 @@
 "use server";
-
 import { LoginSchema } from "@/types/login-schema";
 import { createSafeActionClient } from "next-safe-action";
-import { db } from "@/server";
+import { db } from "..";
 import { eq } from "drizzle-orm";
 import { twoFactorTokens, users } from "../schema";
 import {
@@ -11,29 +10,29 @@ import {
   getTwoFactorTokenByEmail,
 } from "./tokens";
 import { sendTwoFactorEmail, sendVerificationEmail } from "./email";
-import { AuthError } from "next-auth";
 import { signIn } from "../auth";
+import { AuthError } from "next-auth";
 
 const action = createSafeActionClient();
 
-export const emailSignin = action(
+export const emailSignIn = action(
   LoginSchema,
   async ({ email, password, code }) => {
     try {
-      //Check if user is in the database
+      //Check if the user is in the database
       const existingUser = await db.query.users.findFirst({
         where: eq(users.email, email),
       });
 
       if (existingUser?.email !== email) {
-        return { error: "Email not found" };
+        return { error: "Email not  found" };
       }
-      //Check if user is not verified
+
+      //If the user is not verified
       if (!existingUser.emailVerified) {
         const verificationToken = await generateEmailVerificationToken(
           existingUser.email
         );
-
         await sendVerificationEmail(
           verificationToken[0].email,
           verificationToken[0].token
@@ -47,10 +46,10 @@ export const emailSignin = action(
             existingUser.email
           );
           if (!twoFactorToken) {
-            return { error: "Token not found" };
+            return { error: "Invalid Token" };
           }
           if (twoFactorToken.token !== code) {
-            return { error: "Token Incorrect" };
+            return { error: "Invalid Token" };
           }
           const hasExpired = new Date(twoFactorToken.expires) < new Date();
           if (hasExpired) {
@@ -63,7 +62,7 @@ export const emailSignin = action(
           const token = await generateTwoFactorToken(existingUser.email);
 
           if (!token) {
-            return { error: "Token not generated" };
+            return { error: "Token not generated!" };
           }
 
           await sendTwoFactorEmail(token[0].email, token[0].token);

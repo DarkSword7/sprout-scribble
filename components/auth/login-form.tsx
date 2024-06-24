@@ -17,7 +17,7 @@ import * as z from "zod";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { emailSignin } from "@/server/actions/email-signin";
+import { emailSignIn } from "@/server/actions/email-signin";
 import { useAction } from "next-safe-action/hooks";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -38,7 +38,7 @@ export const LoginForm = () => {
   const [success, setSuccess] = useState("");
   const [showTwoFactor, setShowTwoFactor] = useState(false);
 
-  const { execute, status } = useAction(emailSignin, {
+  const { execute, status } = useAction(emailSignIn, {
     onSuccess(data) {
       if (data?.error) setError(data.error);
       if (data?.success) {
