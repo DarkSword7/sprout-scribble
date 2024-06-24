@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Card } from "../ui/card";
 import Image from "next/image";
 import { formatDistance, subDays } from "date-fns";
+import Stars from "./stars";
 
 export default function Review({ reviews }: { reviews: ReviewsWithUser[] }) {
   return (
@@ -22,7 +23,7 @@ export default function Review({ reviews }: { reviews: ReviewsWithUser[] }) {
             <div>
               <p className="text-sm font-bold">{review.user.name}</p>
               <div className="flex items-center gap-2">
-                <h1>stars</h1>
+                <Stars rating={review.rating} totalReviews={reviews.length} />
                 <p className="text-xs font-bold text-muted-foreground">
                   {formatDistance(subDays(review.created!, 0), new Date())}
                 </p>
