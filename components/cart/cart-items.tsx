@@ -20,7 +20,8 @@ import Image from "next/image";
 import { createId } from "@paralleldrive/cuid2";
 
 export default function CartItems() {
-  const { cart, addToCart, removeFromCart } = useCartStore();
+  const { cart, addToCart, removeFromCart, setCheckoutProgress } =
+    useCartStore();
 
   const totalPrice = useMemo(() => {
     return cart.reduce((acc, item) => {
@@ -133,7 +134,11 @@ export default function CartItems() {
           ))}
         </AnimatePresence>
       </motion.div>
-      <Button className="max-w-md w-full" disabled={cart.length === 0}>
+      <Button
+        onClick={() => setCheckoutProgress("payment-page")}
+        className="max-w-md w-full"
+        disabled={cart.length === 0}
+      >
         Checkout
       </Button>
     </motion.div>
