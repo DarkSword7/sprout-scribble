@@ -12,8 +12,7 @@ import {
 } from "drizzle-orm/pg-core";
 import { AdapterAccountType } from "next-auth/adapters";
 import { createId } from "@paralleldrive/cuid2";
-import { InferSelectModel, relations } from "drizzle-orm";
-import { Infer } from "next/dist/compiled/superstruct";
+import { relations } from "drizzle-orm";
 
 export const RoleEnum = pgEnum("roles", ["user", "admin"]);
 
@@ -28,6 +27,7 @@ export const users = pgTable("user", {
   password: text("password"),
   twoFactorEnabled: boolean("twoFactorEnabled").default(false),
   role: RoleEnum("roles").default("user"),
+  customerID: text("customerID"),
 });
 
 export const accounts = pgTable(
@@ -252,4 +252,25 @@ export const orderProduct = pgTable("orderProduct", {
   productID: serial("productID")
     .notNull()
     .references(() => products.id, { onDelete: "cascade" }),
+  orderID: serial("orderID")
+    .notNull()
+    .references(() => orders.id, { onDelete: "cascade" }),
 });
+
+export const orderProductRelations = relations(orderProduct, ({ one }) => ({
+  order: one(orders, {
+    fields: [orderProduct.orderID],
+    references: [orders.id],
+    relationName: "orderProduct",
+  }),
+  product: one(products, {
+    fields: [orderProduct.productID],
+    references: [products.id],
+    relationName: "products",
+  }),
+  productVariants: one(productVariants, {
+    fields: [orderProduct.productVariantID],
+    references: [productVariants.id],
+    relationName: "productVariants",
+  }),
+}));

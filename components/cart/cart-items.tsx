@@ -117,7 +117,7 @@ export default function CartItems() {
         </div>
       )}
       <motion.div className="flex items-center justify-center relative overflow-hidden my-4">
-        <span className="font-medium">Total: ₹</span>
+        <span className="font-medium">Total: $</span>
         <AnimatePresence mode="popLayout">
           {priceInLetters.map((letter, i) => (
             <motion.div key={letter.id}>
