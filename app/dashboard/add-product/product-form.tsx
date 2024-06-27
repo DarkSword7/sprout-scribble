@@ -145,7 +145,7 @@ export default function ProductForm() {
                       />
                       <Input
                         type="number"
-                        placeholder="Your Price in INR"
+                        placeholder="Your Price in USD"
                         {...field}
                         step={0.1}
                         min={0}
