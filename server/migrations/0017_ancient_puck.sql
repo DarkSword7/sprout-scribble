@@ -1,0 +1,1 @@
+ALTER TABLE "oders" ADD COLUMN "paymentIntentID" text;
