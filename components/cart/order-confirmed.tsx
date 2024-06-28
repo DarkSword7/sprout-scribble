@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import orderConfirmed from "@/public/order-confirm.json";
 
 export default function OrderConfirmed() {
-  const { setCheckoutProgress } = useCartStore();
+  const { setCheckoutProgress, setCartOpen } = useCartStore();
   return (
     <div className="flex flex-col items-center gap-4">
       <h2 className="text-2xl font-medium">Thanks for your purchase!</h2>
@@ -16,6 +16,7 @@ export default function OrderConfirmed() {
         <Button
           onClick={() => {
             setCheckoutProgress("cart-page");
+            setCartOpen(false);
           }}
         >
           View your order
