@@ -83,6 +83,7 @@ export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
         setIsLoading(false);
         execute({
           status: "pending",
+          paymentIntentID: data.success.paymentIntentID,
           total: totalPrice,
           products: cart.map((item) => ({
             productID: item.id,
