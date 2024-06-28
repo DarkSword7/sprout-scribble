@@ -83,7 +83,7 @@ export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
         setIsLoading(false);
         execute({
           status: "pending",
-          total: totalPrice * 100,
+          total: totalPrice,
           products: cart.map((item) => ({
             productID: item.id,
             quantity: item.variant.quantity,
