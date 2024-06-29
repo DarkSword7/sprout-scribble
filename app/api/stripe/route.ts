@@ -45,8 +45,6 @@ export async function POST(req: NextRequest) {
         })
         .where(eq(orders.paymentIntentID, event.data.object.id))
         .returning();
-      console.log(charge.receipt_url);
-      console.log(charge);
 
       break;
 
