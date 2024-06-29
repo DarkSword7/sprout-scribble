@@ -43,7 +43,7 @@ export default function Sales({ totalOrders }: { totalOrders: TotalOrders[] }) {
                 <TableRow className="font-medium" key={order.id}>
                   <TableCell>
                     {order.user.image && order.user.name ? (
-                      <div className="flex gap-2 items-center">
+                      <div className="flex w-32 gap-2 items-center">
                         <Image
                           src={order.user.image}
                           alt={order.user.name}
@@ -54,7 +54,7 @@ export default function Sales({ totalOrders }: { totalOrders: TotalOrders[] }) {
                         <p className="text-xs font-medium">{order.user.name}</p>
                       </div>
                     ) : (
-                      <div className="flex gap-2 items-center">
+                      <div className="flex gap-2 w-32 items-center">
                         <Image
                           src={placeholderUser}
                           alt="user not found"
@@ -66,7 +66,9 @@ export default function Sales({ totalOrders }: { totalOrders: TotalOrders[] }) {
                       </div>
                     )}
                   </TableCell>
-                  <TableCell>{product.title}</TableCell>
+                  <TableCell>
+                    <div className="w-32">{product.title}</div>
+                  </TableCell>
                   <TableCell>${product.price}</TableCell>
                   <TableCell>{quantity}</TableCell>
                   <TableCell>
