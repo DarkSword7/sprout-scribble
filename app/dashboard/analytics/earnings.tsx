@@ -102,7 +102,6 @@ export default function Earnings({
           <ResponsiveContainer width={"100%"} height={"100%"}>
             <BarChart data={activeChart}>
               <XAxis dataKey="date" />
-              <YAxis />
               <Tooltip
                 content={(props) => (
                   <div>
