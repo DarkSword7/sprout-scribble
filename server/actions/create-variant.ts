@@ -64,8 +64,6 @@ export const createVariant = action(
         algoliaIndex.saveObject({
           objectID: editVariant[0].id.toString(),
           id: editVariant[0].productID,
-          title: products.title,
-          price: products.price,
           productType: editVariant[0].productType,
           variantImages: newImgs[0].url,
         });
