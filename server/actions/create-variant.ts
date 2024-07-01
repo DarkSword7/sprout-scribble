@@ -61,13 +61,12 @@ export const createVariant = action(
             order: idx,
           }))
         );
-        algoliaIndex.saveObject({
+        algoliaIndex.partialUpdateObject({
           objectID: editVariant[0].id.toString(),
           id: editVariant[0].productID,
           productType: editVariant[0].productType,
           variantImages: newImgs[0].url,
         });
-
         revalidatePath("/dashboard/products");
         return { success: `Edited ${productType}` };
       }
@@ -108,7 +107,6 @@ export const createVariant = action(
             variantImages: newImgs[0].url,
           });
         }
-
         revalidatePath("/dashboard/products");
         return { success: `Added ${productType}` };
       }
