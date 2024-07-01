@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
       break;
 
     default:
-      console.log(`Unhandled event type ${event.type}`);
+      console.log(`${event.type}`);
   }
 
   return new Response("ok", { status: 200 });
