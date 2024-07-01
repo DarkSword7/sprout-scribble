@@ -71,7 +71,7 @@ export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
         redirect: "if_required",
 
         confirmParams: {
-          return_url: `${process.env.DOMAIN_URL}/success`,
+          return_url: "http://localhost:3000/success",
           receipt_email: data.success.user as string,
         },
       });
