@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
       );
       const charge = retrieveOrder.latest_charge as Stripe.Charge;
 
-      const customer = await db
+      await db
         .update(orders)
         .set({
           status: "succeeded",
@@ -46,6 +46,7 @@ export async function POST(req: NextRequest) {
         .where(eq(orders.paymentIntentID, event.data.object.id))
         .returning();
 
+      // Then define and call a function to handle the event product.created
       break;
 
     default:
