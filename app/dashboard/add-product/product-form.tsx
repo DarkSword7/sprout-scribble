@@ -19,7 +19,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { IndianRupee } from "lucide-react";
+import { DollarSign } from "lucide-react";
 import Tiptap from "./tiptap";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAction } from "next-safe-action/hooks";
@@ -139,7 +139,7 @@ export default function ProductForm() {
                   <FormLabel>Product Price</FormLabel>
                   <FormControl>
                     <div className="flex items-center gap-2">
-                      <IndianRupee
+                      <DollarSign
                         size={36}
                         className="p-2 bg-muted rounded-md"
                       />
