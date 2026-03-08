@@ -86,7 +86,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   productType={prodVariant.productType}
                   price={variant.product.price}
                   title={variant.product.title}
-                  image={prodVariant.variantImages[0].url}
+                  image={
+                    prodVariant.variantImages[0]?.url || "/placeholder_small.jpg"
+                  }
                 />
               ))}
             </div>

@@ -2,6 +2,7 @@ import { db } from "@/server";
 import placeholder from "@/public/placeholder_small.jpg";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
+import ReindexAlgoliaButton from "./reindex-algolia-button";
 
 export default async function Products() {
   const products = await db.query.products.findMany({
@@ -22,7 +23,8 @@ export default async function Products() {
         variants: [],
       };
     }
-    const image = product.productVariants[0].variantImages[0].url;
+    const image =
+      product.productVariants[0].variantImages[0]?.url || placeholder.src;
     return {
       id: product.id,
       title: product.title,
@@ -34,6 +36,9 @@ export default async function Products() {
   if (!dataTable) throw new Error("No data found");
   return (
     <div>
+      <div className="flex justify-end mb-4">
+        <ReindexAlgoliaButton />
+      </div>
       <DataTable columns={columns} data={dataTable} />
     </div>
   );

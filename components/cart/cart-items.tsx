@@ -71,7 +71,7 @@ export default function CartItems() {
                     <div>
                       <Image
                         className="rounded-md"
-                        src={item.image}
+                        src={item.image || "/placeholder_small.jpg"}
                         alt={item.name}
                         width={48}
                         height={48}

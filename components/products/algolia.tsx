@@ -36,18 +36,15 @@ function Hit({
     };
   };
 }) {
+  const hitImage = hit.variantImages || "/placeholder_small.jpg";
+
   return (
     <div className="p-4 mb-2 hover:bg-secondary ">
       <Link
-        href={`/products/${hit.objectID}?id=${hit.objectID}&productID=${hit.id}&price=${hit.price}&title=${hit.title}&type=${hit.productType}&image=${hit.variantImages[0]}&variantID=${hit.objectID}`}
+        href={`/products/${hit.objectID}?id=${hit.objectID}&productID=${hit.id}&price=${hit.price}&title=${hit.title}&type=${hit.productType}&image=${hitImage}&variantID=${hit.objectID}`}
       >
         <div className="flex w-full gap-12 items-center justify-between">
-          <Image
-            src={hit.variantImages}
-            alt={hit.title!}
-            width={60}
-            height={60}
-          />
+          <Image src={hitImage} alt={hit.title!} width={60} height={60} />
           {hit._highlightResult?.title && (
             <p
               dangerouslySetInnerHTML={{

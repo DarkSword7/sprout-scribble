@@ -142,7 +142,7 @@ export const VariantImages = () => {
                     <div className="flex items-center justify-center">
                       <Image
                         className="rounded-md"
-                        src={field.url}
+                        src={field.url || "/placeholder_small.jpg"}
                         alt={field.name}
                         width={72}
                         height={48}

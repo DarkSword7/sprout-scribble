@@ -19,8 +19,8 @@ export default function Review({ reviews }: { reviews: ReviewsWithUser[] }) {
               className="rounded-full"
               width={32}
               height={32}
-              alt={review.user.name!}
-              src={review.user?.image!}
+              alt={review.user.name ?? "User"}
+              src={review.user?.image || "/placeholder-user.jpg"}
             />
             <div>
               <p className="text-sm font-bold">{review.user.name}</p>

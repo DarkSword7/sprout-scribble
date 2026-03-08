@@ -146,7 +146,8 @@ export const columns: ColumnDef<ProductColumn>[] = [
     accessorKey: "image",
     header: "Image",
     cell: ({ row }) => {
-      const cellImage = row.getValue("image") as string;
+      const cellImage =
+        (row.getValue("image") as string) || "/placeholder_small.jpg";
       const cellTitle = row.getValue("title") as string;
       return (
         <div className="">

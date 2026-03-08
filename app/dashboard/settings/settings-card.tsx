@@ -112,8 +112,8 @@ export default function SettingsCard(session: SettingsForm) {
                     )}
                     {form.getValues("image") && (
                       <Image
-                        src={form.getValues("image")!}
-                        alt={session.session.user?.name!}
+                        src={form.getValues("image") || "/placeholder-user.jpg"}
+                        alt={session.session.user?.name || "User avatar"}
                         className="rounded-full"
                         width={42}
                         height={42}

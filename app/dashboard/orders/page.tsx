@@ -153,7 +153,10 @@ export default async function OrdersPage() {
                                 <TableRow key={product.id}>
                                   <TableCell>
                                     <Image
-                                      src={productVariants.variantImages[0].url}
+                                      src={
+                                        productVariants.variantImages[0]?.url ||
+                                        "/placeholder_small.jpg"
+                                      }
                                       alt={product.title}
                                       width={48}
                                       height={48}
